@@ -30,7 +30,7 @@ const router = new Router();
 
 // task http
 router.get('/apiersion', async (ctx, next) => {
-    ctx.response.body = 5;
+    ctx.response.body = '6 — delete version back';
 });
 router.get('/allTickets', async (ctx, next) => {
     ctx.response.body = tickets.map(t => ({
@@ -44,7 +44,7 @@ router.get('/ticketById', async (ctx, next) => {
     const ticketId = Number(ctx.request.query.id);
     ctx.response.body = tickets.find(t => t.id === ticketId);
 });
-router.get('/deleteTicketById', async(ctx, next) => {
+router.delete('/deleteTicketById', async(ctx, next) => {
     const ticketId = Number(ctx.request.query.id);
     const index = tickets.findIndex(o => o.id === ticketId);
     if (index !== -1) {
