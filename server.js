@@ -30,7 +30,8 @@ const router = new Router();
 
 // task http
 router.get('/allTickets', async (ctx, next) => {
-    ctx.response.body = tickets.map(t => {delete t.description; return t});
+    const short = tickets.slice()
+    ctx.response.body = short.map(t => {delete t.description; return t});
 });
 router.get('/ticketById', async (ctx, next) => {
     const ticketId = Number(ctx.request.query.id);
