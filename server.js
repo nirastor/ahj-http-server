@@ -18,7 +18,7 @@ const tickets = [
       created: new Date('2021-05-21, 12:45'),
     },
     {
-      id: 2,
+      id: 3,
       status: false,
       name: 'Вторая таска',
       description: 'И её большое описание\n1.сначал это\n2.потом другое',
