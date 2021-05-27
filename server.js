@@ -29,8 +29,8 @@ const tickets = [
 const router = new Router();
 
 // task http
-router.get('/version', async (ctx, next) => {
-    ctx.response.body = 3;
+router.get('/apiVersion', async (ctx, next) => {
+    ctx.response.body = 4;
 });
 router.get('/allTickets', async (ctx, next) => {
     ctx.response.body = tickets.map(t => ({
@@ -44,6 +44,15 @@ router.get('/ticketById', async (ctx, next) => {
     const ticketId = Number(ctx.request.query.id);
     ctx.response.body = tickets.find(t => t.id === ticketId);
 });
+router.delete('/deleteTicketById', async(ctx, next) => {
+    const ticketId = Number(ctx.request.query.id);
+    const index = tickets.findIndex(o => o.id === ticketId);
+    if (index !== -1) {
+        tickets.splice(index, 1);
+    }
+    ctx.response.status = 204;
+});
+
 
 // task different state of loading (demo on hooks)
 // router.get('/data', async (ctx, next) => {
