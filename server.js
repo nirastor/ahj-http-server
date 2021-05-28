@@ -30,7 +30,7 @@ const router = new Router();
 
 // task http
 router.get('/apiVersion', async (ctx, next) => {
-    ctx.response.body = '13 — add post fixed next id';
+    ctx.response.body = '13 — edit ticket';
 });
 router.get('/allTickets', async (ctx, next) => {
     ctx.response.body = tickets.map(t => ({
@@ -70,6 +70,14 @@ router.post('/newPost', async(ctx, next) => {
         name,
         description,
     })
+    ctx.response.status = 204;
+});
+router.post('/editTicket', async(ctx, next) => {
+    const { name, description } = ctx.request.query
+    const id = Number(ctx.request.query.id)
+    const ticketForEdit = tickets.find(t => t.id === id)
+    ticketForEdit.name = name
+    ticketForEdit.description = description
     ctx.response.status = 204;
 });
 
