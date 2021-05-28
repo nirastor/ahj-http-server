@@ -29,8 +29,8 @@ const tickets = [
 const router = new Router();
 
 // task http
-router.get('/apiersion', async (ctx, next) => {
-    ctx.response.body = '8 — update state version';
+router.get('/apiVersion', async (ctx, next) => {
+    ctx.response.body = '10 — update state version';
 });
 router.get('/allTickets', async (ctx, next) => {
     ctx.response.body = tickets.map(t => ({
@@ -52,7 +52,7 @@ router.delete('/deleteTicketById', async(ctx, next) => {
     }
     ctx.response.status = 204;
 });
-router.post('updateTicket', async(ctx, next) => {
+router.post('/updateTicket', async(ctx, next) => {
     const ticketId = Number(ctx.request.query.id);
     const newStatus = ctx.request.query.status === 'true' ? true : false;
     const index = tickets.findIndex(o => o.id === ticketId);
