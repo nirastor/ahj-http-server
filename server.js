@@ -18,7 +18,7 @@ const tickets = [
       created: new Date('2021-05-21, 12:45'),
     },
     {
-      id: 3,
+      id: 2,
       status: false,
       name: 'Вторая таска',
       description: 'И её большое описание\n1.сначал это\n2.потом другое',
@@ -30,7 +30,7 @@ const router = new Router();
 
 // task http
 router.get('/apiVersion', async (ctx, next) => {
-    ctx.response.body = '11 — use update method for status';
+    ctx.response.body = '12 — add post';
 });
 router.get('/allTickets', async (ctx, next) => {
     ctx.response.body = tickets.map(t => ({
@@ -52,13 +52,24 @@ router.delete('/deleteTicketById', async(ctx, next) => {
     }
     ctx.response.status = 204;
 });
-router.update('/updateTicket', async(ctx, next) => {
+router.post('/updateTicket', async(ctx, next) => {
     const ticketId = Number(ctx.request.query.id);
     const newStatus = ctx.request.query.status === 'true' ? true : false;
     const index = tickets.findIndex(o => o.id === ticketId);
     if (index !== -1) {
         tickets[index].status = newStatus
     }
+    ctx.response.status = 204;
+});
+router.post('/newPost', async(ctx, next) => {
+    const { name, description } = ctx.request.query
+    tickets.push({
+        id: tickets.map(i => i.id).sort((a,b) => a - b)[0] + 1,
+        status: false,
+        created: new Date(),
+        name,
+        description,
+    })
     ctx.response.status = 204;
 });
 
